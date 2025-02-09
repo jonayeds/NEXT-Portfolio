@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import localHeading from "next/font/local";
 import {SUSE} from "next/font/google"
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const fontHeading = localHeading({
-  src: "../assets/fonts/font-heading/Rebeqa-Regular.ttf",
+  src: "../assets/fonts/font-heading/Rebeqa-SemiBold.ttf",
   variable:"--font-rebeqa"
 })
 
@@ -26,8 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fontHeading.variable} ${fontDescription.variable}`}
+        className={`${fontHeading.variable} ${fontDescription.variable} bg-light`}
       >
+        <Navbar/>
         {children}
       </body>
     </html>

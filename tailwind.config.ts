@@ -15,6 +15,14 @@ export default {
       fontFamily:{
         heading: ["var(--font-rebeqa)"],
         body:["var(--font-suse)"]
+      },
+      backgroundColor:{
+        light:"#ECE7E1",
+        dark:"#1A1818",
+      },
+      textColor:{
+        light:"#ECE7E1",
+        dark:"#1A1818",
       }
     },
   },
