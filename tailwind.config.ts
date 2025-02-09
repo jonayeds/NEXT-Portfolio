@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily:{
+        heading: ["var(--font-rebeqa)"],
+        body:["var(--font-suse)"]
+      }
     },
   },
   plugins: [],
