@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fontHeading.variable} ${fontDescription.variable} bg-light`}
+        className={`${fontHeading.variable} ${fontDescription.variable} bg-light text-dark`}
       >
         <Navbar/>
         {children}
