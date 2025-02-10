@@ -3,12 +3,39 @@ import {gsap} from "gsap"
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef} from "react";
 
 
 const Navbar = () => {
   const tl  = useRef<gsap.core.Timeline | null>(null);
-    const path = usePathname()
+    const currentPath = usePathname()
+
+    useEffect(()=>{
+        console.log("hit effect")
+        if(currentPath === "/contact"){
+            gsap.to(".line1", {
+                stroke: "white",
+                duration: 1, 
+                ease: "power1.inOut",
+              });
+            gsap.to(".line2", {
+                stroke: "white",
+                duration: 1, 
+                ease: "power1.inOut",
+              });
+        }else{
+            gsap.to(".line1", {
+                stroke: "black",
+                duration:1, 
+                ease: "power1.inOut",
+              });
+            gsap.to(".line2", {
+                stroke: "black",
+                duration: 1, 
+                ease: "power1.inOut",
+              });
+        }   
+    },[currentPath])
 useGSAP(()=>{
     tl.current = gsap.timeline({ paused: true });
   tl.current.to(".line1", {
@@ -48,30 +75,28 @@ useGSAP(()=>{
   });
 })
 
-
 const handleMenuOpen =()=>{
-    console.log("hit open")
   tl.current?.play()
   document.getElementById("cross")?.classList.remove("hidden")
 }
 const  handleMenuClose   = ()=>{
-    console.log("hit close")
   tl.current?.reverse()
   document.getElementById("cross")?.classList.add("hidden")
 }
   return (
     <div className=' top-0 w-full fixed z-50   '>
       {/* hamburger */}
-      <div className='absolute top-6 right-10 w-max p-3  cursor-pointer z-40' >
-        <svg height="45" width="45" className=" "   onClick={handleMenuOpen}  id="hamBerger">
+      <div className='absolute lg:top-6 lg:right-10 top-5 right-6 w-max p-3  cursor-pointer z-40' >
+        <svg  height="45" width="45" className=" "   onClick={handleMenuOpen}  id="hamBerger">
           <line
-            className="line1 "
+          id="line1"
+            className={`line1 `}
             x1="5"
             y1="17"
             x2="40"
             y2="17"
             style={{
-              stroke:`${path === "/contact"? '':'#877366'}`,
+ 
               strokeWidth: 3,
             }}
           />
@@ -82,7 +107,7 @@ const  handleMenuClose   = ()=>{
             x2="40"
             y2="27"
             style={{
-              stroke:`${path === "/contact"? '':'#877366'}`,
+
               strokeWidth: 3,
             }}
           />

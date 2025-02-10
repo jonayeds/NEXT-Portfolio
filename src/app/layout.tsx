@@ -3,6 +3,7 @@ import localHeading from "next/font/local";
 import {SUSE} from "next/font/google"
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import SocialNavigation from "@/components/SocialNavigation";
 
 const fontHeading = localHeading({
   src: "../assets/fonts/font-heading/Rebeqa-SemiBold.ttf",
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${fontHeading.variable} ${fontDescription.variable} bg-light text-dark`}
       >
         <Navbar/>
+        <SocialNavigation/> 
         {children}
       </body>
     </html>
