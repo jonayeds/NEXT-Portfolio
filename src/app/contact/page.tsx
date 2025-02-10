@@ -26,12 +26,11 @@ const ContactPage = () => {
       delay:1.5
     },'con')
   })
-  const form = useRef(null);
+  const form = useRef<HTMLFormElement>(null)
   const sendEmail = (e:any) => {
     e.preventDefault();
-
-    emailjs.sendForm('service_wvpbqb5', 'template_5nv96fk', form.current, {
-        publicKey: 'peLGaIYn0r0UCgJUt',
+    emailjs.sendForm(process.env.NEXT_PUBLIC_EMAILJS_ID as string, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE as string, form.current as HTMLFormElement, {
+        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
       })
       .then(
         () => {

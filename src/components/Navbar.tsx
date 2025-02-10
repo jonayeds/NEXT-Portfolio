@@ -11,7 +11,6 @@ const Navbar = () => {
     const currentPath = usePathname()
 
     useEffect(()=>{
-        console.log("hit effect")
         if(currentPath === "/contact"){
             gsap.to(".line1", {
                 stroke: "white",
