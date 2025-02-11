@@ -72,7 +72,7 @@ const Projects = () => {
             Frontend and Backend Development skills.
           </p>
         </div>
-        <div className="md:px-10 font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[6vh] text-[5vh] font-[100] py-10 md:py-0 overflow-y-auto max-h-[80vh]  mx-auto">
+        <div className="md:px-10 font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[3vw] lg:text-[3.5vw] text-[5vw] font-[100] py-10 md:py-0 overflow-y-auto max-h-[80vh]  mx-auto ">
           {projects?.map((project: IProject) => (
             <Link
               href={`/projects/${(project.name as string).toLocaleLowerCase()}`}

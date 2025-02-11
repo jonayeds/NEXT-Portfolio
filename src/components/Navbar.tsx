@@ -23,7 +23,29 @@ const Navbar = () => {
                 duration: 1, 
                 ease: "power1.inOut",
               });
-        }else{
+        }else if(currentPath.split("/").length > 2  ){
+          gsap.to(".line1", {
+            stroke: "black",
+            duration: 1, 
+            ease: "power1.inOut",
+          });
+        gsap.to(".line2", {
+            stroke: "black",
+            duration: 1, 
+            ease: "power1.inOut",
+          });
+          gsap.to(".line1Alt", {
+            stroke: "white",
+            duration: 1, 
+            ease: "power1.inOut",
+          });
+        gsap.to(".line2Alt", {
+            stroke: "white",
+            duration: 1, 
+            ease: "power1.inOut",
+          });
+        }
+        else{
             gsap.to(".line1", {
                 stroke: "black",
                 duration:1, 
@@ -87,11 +109,11 @@ const  handleMenuClose   = ()=>{
   return (
     <div className=' top-0 w-full fixed z-50   '>
       {/* hamburger */}
-      <div className='absolute lg:top-6 lg:right-10 top-5 right-6 w-max p-3  cursor-pointer z-40' >
+      <div className='absolute hidden lg:flex lg:top-6 lg:right-10 top-5 right-6 w-max p-3  cursor-pointer z-40' >
         <svg  height="45" width="45" className=" "   onClick={handleMenuOpen}  id="hamBerger">
           <line
           id="line1"
-            className={`line1 `}
+            className={`line1 hidden lg:flex`}
             x1="5"
             y1="17"
             x2="40"
@@ -102,13 +124,39 @@ const  handleMenuClose   = ()=>{
             }}
           />
           <line
-            className="line2 "
+            className="line2 hidden lg:flex"
             x1="5"
             y1="27"
             x2="40"
             y2="27"
             style={{
 
+              strokeWidth: 3,
+            }}
+          />
+        </svg>
+      </div>
+      {/* hamburger for mobile */}
+      <div className='absolute lg:top-6 lg:right-10 top-5 right-6 w-max p-3 lg:hidden flex cursor-pointer z-40' >
+        <svg  height="45" width="45" className=" "   onClick={handleMenuOpen}  id="hamBerger">
+          <line
+          id="line1"
+            className={`line1 line1Alt lg:hidden flex`}
+            x1="5"
+            y1="17"
+            x2="40"
+            y2="17"
+            style={{
+              strokeWidth: 3,
+            }}
+          />
+          <line
+            className="line2 line2Alt lg:hidden flex"
+            x1="5"
+            y1="27"
+            x2="40"
+            y2="27"
+            style={{
               strokeWidth: 3,
             }}
           />

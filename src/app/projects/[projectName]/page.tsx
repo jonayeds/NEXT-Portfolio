@@ -1,14 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import ProjectDetailIntro from "@/components/projects/ProjectDetailIntro"
 import TechMarque from "@/components/projects/TechMarque"
+import { IProject } from "@/types"
 import { TiLocationArrow } from "react-icons/ti"
 
 
 const ProjectDetail = async({params}:{params:Promise<{projectName:string}>}) => {
 const {projectName} = await params
   const res = await fetch(`${process.env.SERVER_URL}/projects/${projectName}`)
-  const {data:project} = await res.json()
-  console.log(project)
+  const {data} = await res.json()
+  const project = data as IProject
   console.log(process.env.SERVER_URL)
 
   
