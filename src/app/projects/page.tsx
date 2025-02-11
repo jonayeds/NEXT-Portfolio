@@ -2,17 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-// import unilink from "";
-// import backpackers from "../assets/images/projects/Backpackers.jpg"
-// import travelia from "../assets/images/projects/travelia.jpg"
-// import aultly from "../assets/images/projects/Aultly.jpg"
-// import youShare from "../assets/images/projects/YouShare.jpg"
 import Link from "next/link";
 import Image from "next/image";
 
 const Projects = () => {
   const tl = gsap.timeline();
-  // const imageHover = gsap.timeline()
   useGSAP(() => {
     tl.to(".project-loader", {
       height: 0,
@@ -72,7 +66,7 @@ const Projects = () => {
             Here are some of my recent projects. These projects showcases Frontend and Backend Development skills. 
           </p>
         </div>
-        <div className="md:px-10 font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[6vh] text-[5vh] font-[100] py-10 md:py-0 mx-auto">
+        <div className="md:px-10 font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[6vh] text-[5vh] font-[100] py-10 md:py-0 overflow-y-auto max-h-[80vh]  mx-auto">
           <Link
             href={'/project/unilink'}
             className="  "
@@ -134,7 +128,38 @@ const Projects = () => {
               alt=""
               className="w-80 absolute rounded-2xl BACKPACKERS hidden opacity-0 scale-0 projectImg"
             />
-          </Link> <Link
+          </Link> 
+          <Link
+            href={'/project/aultly'}
+            className="  "
+            onMouseMove={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+          <h1 className=" py-7 border-b-2 border-[#1a1a1a] cursor-pointer">Aultly</h1>
+            <Image
+            width={500}
+            height={500}
+              src={"/projects/Aultly.jpg"}
+              alt=""
+              className="w-80 absolute rounded-2xl AULTLY hidden opacity-0 scale-0 projectImg" 
+            />
+          </Link>
+          <Link
+            href={'/project/aultly'}
+            className="  "
+            onMouseMove={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+          <h1 className=" py-7 border-b-2 border-[#1a1a1a] cursor-pointer">Aultly</h1>
+            <Image
+            width={500}
+            height={500}
+              src={"/projects/Aultly.jpg"}
+              alt=""
+              className="w-80 absolute rounded-2xl AULTLY hidden opacity-0 scale-0 projectImg" 
+            />
+          </Link>
+          <Link
             href={'/project/aultly'}
             className="  "
             onMouseMove={handleMouseEnter}

@@ -3,12 +3,13 @@ import {gsap} from "gsap"
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef, useState} from "react";
 
 
 const Navbar = () => {
   const tl  = useRef<gsap.core.Timeline | null>(null);
     const currentPath = usePathname()
+    const [menu, setMenu] = useState(false)
 
     useEffect(()=>{
         if(currentPath === "/contact"){
@@ -34,7 +35,7 @@ const Navbar = () => {
                 ease: "power1.inOut",
               });
         }   
-    },[currentPath])
+    },[currentPath, menu])
 useGSAP(()=>{
     tl.current = gsap.timeline({ paused: true });
   tl.current.to(".line1", {
@@ -79,6 +80,7 @@ const handleMenuOpen =()=>{
   document.getElementById("cross")?.classList.remove("hidden")
 }
 const  handleMenuClose   = ()=>{
+  setMenu(!menu)
   tl.current?.reverse()
   document.getElementById("cross")?.classList.add("hidden")
 }
