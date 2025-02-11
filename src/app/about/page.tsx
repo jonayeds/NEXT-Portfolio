@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import image from  "@/assets/profile.jpg"
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
+import RegularButton from '@/components/shared/RegularButton';
 
 const AboutPage = () => {
   const tl = gsap.timeline();
@@ -35,7 +36,7 @@ const AboutPage = () => {
         <p className="font-body text-3xl font-light  tracking-[2px] leading-[45px] mt-16 lg:mt-0 ">I`m Sajjad Jonayed. A Fullstack web developer, problem solver, creative thinker.</p>
         <div className=' mt-12   max-w-xl  '>
         <a href="/Resume-Sajjad-Jonayed.pdf" download={"Resume-Sajjad-Jonayed.pdf"}>
-        <button   className='px-10  relative py-2 border-2 border-[#1a1a1a]'><div className='absolute w-full text-center flex justify-center bg-[#ece7e1] h-full font-body font-light text-lg top-0 left-0 items-center  hover:tracking-[3px] duration-700 '>My Resume</div>My Resume</button>
+        <RegularButton text='My Resume'/>
         </a>
       </div>
         </div>

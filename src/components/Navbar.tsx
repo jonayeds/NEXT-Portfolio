@@ -58,8 +58,8 @@ const Navbar = () => {
               });
         }   
     },[currentPath, menu])
-useGSAP(()=>{
-    tl.current = gsap.timeline({ paused: true });
+    useGSAP(()=>{
+  tl.current = gsap.timeline({ paused: true });
   tl.current.to(".line1", {
     attr:{
       y1:5,
@@ -69,7 +69,7 @@ useGSAP(()=>{
     delay:0.3,
     duration: 0.7,
     
-    ease: "power1.in",
+    ease: "power1.inOut",
   },"ham");
   tl.current.to(".line2", {
     attr:{
@@ -79,22 +79,21 @@ useGSAP(()=>{
     duration: 0.7,
     delay:0.3,
     stroke: "white",
-    ease: "power1.in",
+    ease: "power1.inOut",
   },"ham");
   tl.current.to(".menuWindow", {
     top:0,
     display:"flex",
     height:"100vh",
-    duration:0.9,
-    
+    duration: 1,
     ease: "power1.inOut",
   },"ham");
   tl.current.to(".navigation-content", {
     bottom:0,
-    duration: 1,
+    duration: 0.8,
     stagger:0.1,
     delay:-1,
-    ease: "power1.inOut",
+    ease: "power2.out",
   });
 })
 
