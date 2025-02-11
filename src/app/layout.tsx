@@ -4,6 +4,7 @@ import {SUSE} from "next/font/google"
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SocialNavigation from "@/components/SocialNavigation";
+import Providers from "@/redux/lib/providers";
 
 const fontHeading = localHeading({
   src: "../assets/fonts/font-heading/Rebeqa-SemiBold.ttf",
@@ -26,7 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <Providers>
+      <html lang="en">
       <body
         className={`${fontHeading.variable} ${fontDescription.variable} bg-light text-dark`}
       >
@@ -35,5 +37,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
+    </Providers>
   );
 }
