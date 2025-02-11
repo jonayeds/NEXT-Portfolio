@@ -60,8 +60,8 @@ const Projects = () => {
   return (
     <div className="min-h-screen w-screen bg-light lg:px-24 px-4 md:px-10 flex  items-center justify-center ">
       <div className="absolute top-0 w-screen h-screen lg:-mx-24 bg-dark -mx-4 project-loader z-30"></div>
-      <div className="w-full text-center  lg:text-left h-max flex items-end justify-around flex-col md:flex-row lg:pt-12 pt-20">
-        <div className="mx-auto py-8">
+      <div className="w-full text-center  lg:text-left h-max flex items-end justify-around flex-col md:flex-row lg:pt-12 pt-20 ">
+        <div className="mx-auto py-8 ">
           <div className="overflow-hidden">
             <h1 className="text-7xl font-heading font-[100] tracking-[8px]  uppercase heading">
               Projets
@@ -72,7 +72,7 @@ const Projects = () => {
             Frontend and Backend Development skills.
           </p>
         </div>
-        <div className="md:px-10 font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[3vw] lg:text-[3.5vw] text-[5vw] font-[100] py-10 md:py-0 overflow-y-auto max-h-[80vh]  mx-auto ">
+        <div className="md:px-10  font-body  uppercase tracking-[2px] md:tracking-[6px] md:text-[3vw] lg:text-[3.5vw] text-[5vw] font-[100] py-10 md:py-0 md:overflow-y-auto max-h-[80vh]  mx-auto ">
           {projects?.map((project: IProject) => (
             <Link
               href={`/projects/${(project.name as string).toLocaleLowerCase()}`}

@@ -11,10 +11,7 @@ const {projectName} = await params
   const {data} = await res.json()
   const project = data as IProject
   console.log(process.env.SERVER_URL)
-
   
-
-
   return (
     <div className="lg:px-36 px-4  min-h-screen w-screen ">
       <div className="">

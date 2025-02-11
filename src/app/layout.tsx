@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import localHeading from "next/font/local";
 import {SUSE} from "next/font/google"

@@ -69,7 +69,7 @@ useGSAP(()=>{
     delay:0.3,
     duration: 0.7,
     
-    ease: "power1.inOut",
+    ease: "power1.in",
   },"ham");
   tl.current.to(".line2", {
     attr:{
@@ -79,21 +79,22 @@ useGSAP(()=>{
     duration: 0.7,
     delay:0.3,
     stroke: "white",
-    ease: "power1.inOut",
+    ease: "power1.in",
   },"ham");
   tl.current.to(".menuWindow", {
     top:0,
     display:"flex",
     height:"100vh",
-    duration: 1,
+    duration:0.9,
+    
     ease: "power1.inOut",
   },"ham");
   tl.current.to(".navigation-content", {
     bottom:0,
-    duration: 0.8,
+    duration: 1,
     stagger:0.1,
     delay:-1,
-    ease: "power2.out",
+    ease: "power1.inOut",
   });
 })
 
@@ -169,8 +170,8 @@ const  handleMenuClose   = ()=>{
         {/* navigation content */}
             <div className="w-full z-30">
               {
-                ["home" ,"projects", "about", "contact" ].map((text, index)=>(
-                  <Link onClick={handleMenuClose}  href={`/${text !== "home" ? text: ''}`} key={index} className="text-7xl md:text-8xl text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[30px]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">{text}</span></Link>
+                ["home" ,"projects", "about", "contact" , "login"].map((text, index)=>(
+                  <Link onClick={handleMenuClose}  href={`/${text !== "home" ? text: ''}`} key={index} className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">{text}</span></Link>
                 ))
               }
             </div>
