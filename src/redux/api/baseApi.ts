@@ -8,7 +8,10 @@ export const baseApi = createApi({
     getProjects: builder.query({
       query: () => "/projects",
     }),
+    getProjectByName: builder.query({
+      query: (args:string) => `/projects/${args}`,
+    }),
   }),
 })
 
-export const { useGetProjectsQuery } = baseApi
+export const { useGetProjectsQuery, useGetProjectByNameQuery } = baseApi
