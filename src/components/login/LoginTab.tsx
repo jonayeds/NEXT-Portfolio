@@ -8,11 +8,15 @@ import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import {  register as setRegister } from "@/redux/features/loginState.slice";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { setUser } from "@/redux/features/user.slice";
 
 export type FormValues = {
     email: string;
     password: string;
   };
+
+
 
 
 
@@ -32,12 +36,20 @@ const LoginTab = () => {
        try {
         const result = await loginUser(data)
         console.log(result)
-        if(result?.success){
+        if(result){
           toast.success("Successfully Logged in", {id:toastId})
-          localStorage.setItem("accessToken", result.accessToken)
+          localStorage.setItem("accessToken", result.token)
+          if(result.user){
+            dispatch(setUser({userInfo:{
+              role:result?.user?.role,
+              email:result?.user?.email,
+            },
+            token:result.token
+          }))
+          }
           router.push("/")
-        }else if(!result?.success){
-          toast.error(`${result.message}`, {id:toastId})
+        }else if(!result){
+          toast.error(`Incorrect email or password !!`, {id:toastId})
         }
        } catch (err:any) {
         console.error(err.message);
@@ -101,8 +113,14 @@ const LoginTab = () => {
             <hr className="border-[1px] border-[#181818] flex-1 border-opacity-10"/>
           </div>
           <div>
-            <button className="w-full font-body border-[1px] border-[#181818] rounded-xl py-2 mt-4">Login with Google</button>
-            <button className="w-full border-[1px] font-body border-[#181818] rounded-xl py-2 mt-4">Login with Github</button>
+            <button onClick={()=>signIn( "google",{
+              callbackUrl:"http://localhost:3000"
+            })} className="w-full font-body border-[1px] border-[#181818] rounded-xl py-2 mt-4">Login with Google</button>
+            <button
+            onClick={()=>signIn( "github",{
+              callbackUrl:"http://localhost:3000"
+            })}
+            className="w-full border-[1px] font-body border-[#181818] rounded-xl py-2 mt-4">Login with Github</button>
           </div>
     </div>
   )

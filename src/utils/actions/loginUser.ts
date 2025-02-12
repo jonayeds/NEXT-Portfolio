@@ -1,6 +1,7 @@
 "use server"
 
 import { FormValues } from "@/components/login/LoginTab"
+import { decodeAccessToken } from "../auth/decodeJWT"
 
 
 
@@ -15,5 +16,8 @@ export const loginUser = async(data:FormValues)=> {
 
     })
     const userInfo = await res.json()
-    return userInfo
+    const user = decodeAccessToken(userInfo.accessToken)
+    
+
+    return {user, token: userInfo.accessToken, message:userInfo.message}
 }
