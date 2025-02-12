@@ -1,7 +1,7 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { loginUser } from "@/utils/actions/loginUser";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import RegularButton from "../shared/RegularButton";
 import Link from "next/link";
@@ -20,12 +20,15 @@ const RegisterTab = () => {
         const handleLoginState = ()=>{
             dispatch(login())
         }
+        
     const {
         register,
         handleSubmit,
         
       } = useForm<RegisterForm>();
       const router = useRouter()
+      const route = usePathname()
+
       const onSubmit = async (data: RegisterForm) => {
        try {
         const result = await loginUser(data)
@@ -42,9 +45,9 @@ const RegisterTab = () => {
        
       };
   return (
-    <div className="border-2 border-[#1A1818] py-8 px-8 rounded-lg  border-opacity-80">
+    <div className="border-2 border-[#1A1818] py-8 px-8 rounded-lg min-w-[30vw] border-opacity-80">
         <div className=" px-4">
-            <h1 className="font-heading text-center text-[5vw] uppercase tracking-wider mb-8">Register</h1>
+            <h1 className="font-heading text-center lg:text-[5vw] text-[10vw] uppercase tracking-wider mb-8">Register</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label
@@ -102,10 +105,10 @@ const RegisterTab = () => {
             </div>
           </form>
         </div>
-        <div className="flex items-center mt-4 ">
-            <p className="text-center  font-body font-light">Don`t have an account? </p>
-            <Link href={"/register"} className="text-amber-700 flex lg:hidden hover:underline ml-1">Register</Link>
-            <span onClick={handleLoginState} className="text-amber-700 lg:flex hidden hover:underline ml-1">Register</span>
+        <div className="flex items-center mt-4 justify-center">
+            <p className="text-center  font-body font-light">Already have an account? </p>
+            <Link href={"/login"} className={`text-amber-700 flex ${route === "/login"? 'lg:hidden': ''}  hover:underline ml-1`}>Login</Link>
+            <span onClick={handleLoginState} className={`text-amber-700 cursor-pointer ${route === '/login' ? 'lg:flex ': ''} hidden hover:underline ml-1`}>Login</span>
         </div>
     </div>
   )

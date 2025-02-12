@@ -42,9 +42,9 @@ const LoginTab = () => {
        
       };
   return (
-    <div className="border-2 border-[#1A1818] py-8 px-8 rounded-lg  border-opacity-80">
+    <div className="border-2 min-w-[30vw] border-[#1A1818] py-8 px-8 rounded-lg  border-opacity-80">
         <div className=" px-4">
-            <h1 className="font-heading text-center text-[5vw] uppercase tracking-wider mb-8">Login</h1>
+            <h1 className="font-heading text-center lg:text-[5vw] text-[10vw] uppercase tracking-wider mb-8">Login</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label
@@ -86,10 +86,10 @@ const LoginTab = () => {
           </form>
           
         </div>
-        <div className="flex items-center mt-4 ">
+        <div className="flex items-center mt-4 justify-center">
             <p className="text-center  font-body font-light">Don`t have an account? </p>
-            <Link href={"/register"} className="text-amber-700 flex lg:hidden hover:underline ml-1">Register</Link>
-            <span onClick={handleLoginState} className="text-amber-700 lg:flex hidden hover:underline ml-1">Register</span>
+            <Link href={"/register"} className="text-amber-700 cursor-pointer flex lg:hidden hover:underline ml-1">Register</Link>
+            <span onClick={handleLoginState} className="text-amber-700 lg:flex hidden hover:underline ml-1 cursor-pointer">Register</span>
         </div>
           <div className="flex mt-4 items-center gap-2">
             <hr className="border-[1px] border-[#181818] flex-1 border-opacity-10"/>
