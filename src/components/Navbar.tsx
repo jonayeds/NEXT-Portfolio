@@ -5,8 +5,9 @@ import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState} from "react";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { signOut } from "next-auth/react";
+import { removeUser } from "@/redux/features/user.slice";
 
 
 const Navbar = () => {
@@ -15,6 +16,7 @@ const Navbar = () => {
     const user = useAppSelector(state =>state.userLogin)
     const [menu, setMenu] = useState(false)
 
+    const dispatch = useAppDispatch()
     useEffect(()=>{
         if(currentPath === "/contact"){
             gsap.to(".line1", {
@@ -107,8 +109,9 @@ const handleMenuOpen =()=>{
 }
 const  handleMenuClose   = (e:any)=>{
   if(e.target.innerText === "LOGOUT"){
-    signOut()
-
+    dispatch(removeUser())
+      signOut()
+    // window.location.reload()
   }
   setMenu(!menu)
   tl.current?.reverse()
@@ -182,7 +185,7 @@ const  handleMenuClose   = (e:any)=>{
                 ))
               }
               {
-                user?.token ? <button onClick={handleMenuClose}    className="text-[9vw] font-bold w-full text-left md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Logout</span></button>:  <Link onClick={handleMenuClose}  href={`/login`}  className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Login</span></Link>
+                user.token ? <button onClick={handleMenuClose}    className="text-[9vw] font-bold w-full text-left md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Logout</span></button>:  <Link onClick={handleMenuClose}  href={`/login`}  className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Login</span></Link>
               }
               
             </div>

@@ -27,6 +27,7 @@ export default function Home() {
         },
         token:loginReq.token
       }))
+      window.location.reload()
       }
       
     }

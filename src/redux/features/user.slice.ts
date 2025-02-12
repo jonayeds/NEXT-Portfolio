@@ -22,10 +22,14 @@ const initialState:TAuthState = {
             const {userInfo, token} = action.payload
             state.userInfo = userInfo 
             state.token = token
+        },
+        removeUser:(state)=>{
+            state.token =null
+            state.userInfo = null
         }
     }
 })
 
-export const {setUser} = loginSlice.actions
+export const {setUser, removeUser} = loginSlice.actions
 
 export default loginSlice.reducer
