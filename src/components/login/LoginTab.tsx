@@ -7,6 +7,7 @@ import RegularButton from "../shared/RegularButton";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import {  register as setRegister } from "@/redux/features/loginState.slice";
+import { toast } from "sonner";
 
 export type FormValues = {
     email: string;
@@ -27,13 +28,16 @@ const LoginTab = () => {
       } = useForm<FormValues>();
       const router = useRouter()
       const onSubmit = async (data: FormValues) => {
+        const toastId = toast.loading("Logging in...")
        try {
         const result = await loginUser(data)
         console.log(result)
         if(result?.success){
-          alert(result.message)
+          toast.success("Successfully Logged in", {id:toastId})
           localStorage.setItem("accessToken", result.accessToken)
           router.push("/")
+        }else if(!result?.success){
+          toast.error(`${result.message}`, {id:toastId})
         }
        } catch (err:any) {
         console.error(err.message);
@@ -81,7 +85,7 @@ const LoginTab = () => {
             </div>
 
             <div className="flex  justify-center">
-             <RegularButton text="Login"/>
+             <RegularButton type="submit" text="Login"/>
             </div>
           </form>
           

@@ -11,7 +11,6 @@ import { IProject } from "@/types/index";
 const Projects = () => {
   const { data } = useGetProjectsQuery(undefined);
   const projects = data?.data;
-  console.log(projects);
   const tl = gsap.timeline();
   useGSAP(() => {
     tl.to(".project-loader", {

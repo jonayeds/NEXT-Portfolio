@@ -1,12 +1,13 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { loginUser } from "@/utils/actions/loginUser";
 import { usePathname, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import RegularButton from "../shared/RegularButton";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import { login } from "@/redux/features/loginState.slice";
+import { registerUser } from "@/utils/actions/registerUser";
+import { toast } from "sonner";
 
 export type RegisterForm = {
     email: string;
@@ -30,13 +31,17 @@ const RegisterTab = () => {
       const route = usePathname()
 
       const onSubmit = async (data: RegisterForm) => {
+        console.log(data)
+        const toastId = toast.loading("Registering...")
        try {
-        const result = await loginUser(data)
+        const result = await registerUser(data)
         console.log(result)
         if(result?.success){
-          alert(result.message)
+          toast.success("Registration Successfull",{id:toastId})
           localStorage.setItem("accessToken", result.accessToken)
           router.push("/")
+        }else if(!result?.success){
+          toast.error(result?.message, {id:toastId})
         }
        } catch (err:any) {
         console.error(err.message);
@@ -101,7 +106,7 @@ const RegisterTab = () => {
             </div>
 
             <div className="flex  justify-center">
-             <RegularButton text="Register"/>
+             <RegularButton type="submit"  text="Register"/>
             </div>
           </form>
         </div>

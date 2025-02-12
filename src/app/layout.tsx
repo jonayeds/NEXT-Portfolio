@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SocialNavigation from "@/components/SocialNavigation";
 import Providers from "@/redux/lib/providers";
+import { Toaster } from "sonner";
 
 const fontHeading = localHeading({
   src: "../assets/fonts/font-heading/Rebeqa-SemiBold.ttf",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${fontHeading.variable} ${fontDescription.variable} bg-light text-dark`}
       >
+        <Toaster position="top-center" />
         <Navbar/>
         <SocialNavigation/> 
         {children}
