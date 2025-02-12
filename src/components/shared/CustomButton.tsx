@@ -2,9 +2,13 @@
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useAppSelector } from "@/redux/hook";
 const CustomButton = () => {
   const tl = gsap.timeline();
   const tl1 = gsap.timeline();
+    const currentUser = useAppSelector((state)=>state.userLogin)
+    const {userInfo} = currentUser
+    
 
   useGSAP(() => {
     tl1.from(".btn-tran", {
@@ -39,7 +43,7 @@ const CustomButton = () => {
   };
   return (
     <Link
-      href={"/projects"}
+      href={userInfo? "/dashboard" : "/projects" }
       className="btn-tran  block overflow-hidden mx-auto"
     >
       <button
@@ -48,7 +52,7 @@ const CustomButton = () => {
         onMouseEnter={buttonEnter}
       >
         {" "}
-        My Projects{" "}
+        {userInfo? "Dashboad" : "My Projects" }{" "}
         <div className="absolute hidden w-2 h-2  rounded-full button-ani bg-black bottom-0 left-[50%] -z-10"></div>
       </button>
     </Link>

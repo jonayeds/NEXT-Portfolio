@@ -1,10 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 "use client"
 import { gsap } from 'gsap'
 import { useGSAP } from "@gsap/react"
 import CustomButton from '@/components/shared/CustomButton'
+import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import { loginUser } from '@/utils/actions/loginUser'
+import { useAppDispatch, useAppSelector } from '@/redux/hook'
+import { setUser } from '@/redux/features/user.slice'
 
 
 export default function Home() {
+  const { data: session } = useSession();
+  const dispatch = useAppDispatch()
+  const data = useAppSelector(state=> state.userLogin)
+  useEffect(()=>{
+    async function login() {
+      if(session?.user && !data?.token){
+        const loginReq = await loginUser({email:session.user.email as string, password:"abc"})
+        console.log("main Plb", loginReq)
+        localStorage.setItem("accessToken", loginReq.token)
+        dispatch(setUser({userInfo:{
+          email:session.user.email as string,
+          role:loginReq.user?.role as "admin"|"user",
+        },
+        token:loginReq.token
+      }))
+      }
+      
+    }
+    login()
+  },[session])
   const tl  = gsap.timeline()
     useGSAP(()=>{
         tl

@@ -25,6 +25,12 @@ const LoginTab = () => {
     const handleLoginState = ()=>{
         dispatch(setRegister())
     }
+    const handleGithubLogin = ()=>{
+      
+      signIn( "github",{
+        callbackUrl:"http://localhost:3000"
+      })
+    }
     const {
         register,
         handleSubmit,
@@ -117,9 +123,7 @@ const LoginTab = () => {
               callbackUrl:"http://localhost:3000"
             })} className="w-full font-body border-[1px] border-[#181818] rounded-xl py-2 mt-4">Login with Google</button>
             <button
-            onClick={()=>signIn( "github",{
-              callbackUrl:"http://localhost:3000"
-            })}
+            onClick={handleGithubLogin}
             className="w-full border-[1px] font-body border-[#181818] rounded-xl py-2 mt-4">Login with Github</button>
           </div>
     </div>

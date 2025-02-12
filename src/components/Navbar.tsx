@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import {gsap} from "gsap"
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState} from "react";
+import { useAppSelector } from "@/redux/hook";
+import { signOut } from "next-auth/react";
 
 
 const Navbar = () => {
   const tl  = useRef<gsap.core.Timeline | null>(null);
     const currentPath = usePathname()
+    const user = useAppSelector(state =>state.userLogin)
     const [menu, setMenu] = useState(false)
 
     useEffect(()=>{
@@ -101,7 +105,11 @@ const handleMenuOpen =()=>{
   tl.current?.play()
   document.getElementById("cross")?.classList.remove("hidden")
 }
-const  handleMenuClose   = ()=>{
+const  handleMenuClose   = (e:any)=>{
+  if(e.target.innerText === "LOGOUT"){
+    signOut()
+
+  }
   setMenu(!menu)
   tl.current?.reverse()
   document.getElementById("cross")?.classList.add("hidden")
@@ -169,10 +177,14 @@ const  handleMenuClose   = ()=>{
         {/* navigation content */}
             <div className="w-full z-30">
               {
-                ["home" ,"projects", "about", "contact" , "login"].map((text, index)=>(
+                ["home" ,"projects", "about", "contact" ].map((text, index)=>(
                   <Link onClick={handleMenuClose}  href={`/${text !== "home" ? text: ''}`} key={index} className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">{text}</span></Link>
                 ))
               }
+              {
+                user?.token ? <button onClick={handleMenuClose}    className="text-[9vw] font-bold w-full text-left md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Logout</span></button>:  <Link onClick={handleMenuClose}  href={`/login`}  className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Login</span></Link>
+              }
+              
             </div>
       </div>
     </div>

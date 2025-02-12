@@ -28,18 +28,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
-    <Providers>
-      <html lang="en">
+    <html lang="en">
       <body
         className={`${fontHeading.variable} ${fontDescription.variable} bg-light text-dark`}
-      >
+        >
+        <Providers>
         <Toaster position="top-center" />
         <Navbar/>
         <SocialNavigation/> 
         {children}
+    </Providers>
       </body>
     </html>
-    </Providers>
   );
 }

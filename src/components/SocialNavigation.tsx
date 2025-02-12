@@ -1,9 +1,11 @@
 "use client"
+// import { useAppSelector } from "@/redux/hook"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 
 const SocialNavigation = () => {
+
   const location = usePathname()
   const l = location.split("/").length
   return (

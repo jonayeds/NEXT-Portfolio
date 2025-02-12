@@ -16,6 +16,7 @@ export const loginUser = async(data:FormValues)=> {
 
     })
     const userInfo = await res.json()
+    
     const user = decodeAccessToken(userInfo.accessToken)
     
 
