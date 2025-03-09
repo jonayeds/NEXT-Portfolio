@@ -5,6 +5,7 @@ import { IProject } from "@/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 
 const AllProjects = ({projects}:{projects:IProject[]}) => {
     const tl = gsap.timeline();
@@ -64,13 +65,16 @@ const AllProjects = ({projects}:{projects:IProject[]}) => {
               <h1 className=" py-7 border-b-2  border-[#1a1a1a] cursor-pointer">
                 {project.name.toUpperCase()}
               </h1>
-              <img
-              width={500}
-              height={500}
-              src={project.photo}
-              alt=""
-              className={`w-80 absolute rounded-2xl ${project.name.toLowerCase() !== "youshare"? project.name.toUpperCase() : "YOUSHARE projectImg" } hidden opacity-0 scale-0 z-10 projectImg`}
-            />
+              <Image
+                width={500}
+                height={500}
+                src={project.photo}
+                alt={`${project.name} preview`}
+                className={`w-80 absolute rounded-2xl ${project.name.toLowerCase() !== "youshare"? project.name.toUpperCase() : "YOUSHARE projectImg" } hidden opacity-0 scale-0 z-10 projectImg`}
+                priority={true}
+                quality={100}
+              />
+              
             </Link>
           ))}
         </div>
