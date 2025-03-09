@@ -1,11 +1,14 @@
 import AllProjects from "@/components/projects/AllProjects";
-import { getAllProjects } from "@/utils/actions/projects";
+import { getProjects } from "@/app/page"; // Import the cached function
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Projects | Portfolio',
+  description: 'Explore my recent frontend and backend development projects',
+};
 
 const Projects = async() => {
-  const {data} = await getAllProjects()
-
-
+  const data = await getProjects();
   
   return (
     <div className="min-h-screen w-screen bg-light lg:px-24 px-4 md:px-10 flex  items-center justify-center ">
@@ -14,7 +17,7 @@ const Projects = async() => {
         <div className="mx-auto py-8 ">
           <div className="overflow-hidden">
             <h1 className="text-7xl font-heading font-[100] tracking-[8px]  uppercase heading">
-              Projets
+              Projects
             </h1>
           </div>
           <p className="max-w-xl font-body tracking-[1.2px] mt-4">
