@@ -181,11 +181,8 @@ const  handleMenuClose   = (e:any)=>{
             <div className="w-full z-30">
               {
                 ["home" ,"projects", "about", "contact" ].map((text, index)=>(
-                  <Link onClick={handleMenuClose}  href={`/${text !== "home" ? text: ''}`} key={index} className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">{text}</span></Link>
+                  <Link onClick={handleMenuClose}  href={`/${text !== "home" ? text: ''}`} key={index} className="text-[10vw] font-bold md:font-semibold sm:text-[8vw]  md:text-[7vw] lg:text-[5vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">{text}</span></Link>
                 ))
-              }
-              {
-                user.token ? <button onClick={handleMenuClose}    className="text-[9vw] font-bold w-full text-left md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Logout</span></button>:  <Link onClick={handleMenuClose}  href={`/login`}  className="text-[9vw] font-bold md:font-semibold sm:text-[7vw]  md:text-[5vw] lg:text-[4vw] text-container font-heading uppercase tracking-widest  block  text-light border-b-2 mt-10 py-2 md:hover:tracking-[1vw]  overflow-hidden cursor-pointer"><span className="navigation-content -bottom-[150px] relative  duration-500  ">Login</span></Link>
               }
               
             </div>

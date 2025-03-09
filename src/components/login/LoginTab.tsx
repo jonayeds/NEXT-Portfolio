@@ -17,9 +17,6 @@ export type FormValues = {
   };
 
 
-
-
-
 const LoginTab = () => {
     const dispatch = useAppDispatch()
     const handleLoginState = ()=>{
@@ -28,13 +25,12 @@ const LoginTab = () => {
     const handleGithubLogin = ()=>{
       
       signIn( "github",{
-        callbackUrl:"http://localhost:3000"
+        callbackUrl:"https://next-portfolio-five-umber.vercel.app/"
       })
     }
     const {
         register,
         handleSubmit,
-        
       } = useForm<FormValues>();
       const router = useRouter()
       const onSubmit = async (data: FormValues) => {
@@ -44,13 +40,12 @@ const LoginTab = () => {
         console.log(result)
         if(result){
           toast.success("Successfully Logged in", {id:toastId})
-          localStorage.setItem("accessToken", result.token)
-          if(result.user){
+          if(result){
             dispatch(setUser({userInfo:{
               role:result?.user?.role,
               email:result?.user?.email,
             },
-            token:result.token
+            token:result.accessToken
           }))
           }
           router.push("/")
@@ -119,9 +114,9 @@ const LoginTab = () => {
             <hr className="border-[1px] border-[#181818] flex-1 border-opacity-10"/>
           </div>
           <div>
-            <button onClick={()=>signIn( "google",{
+            {/* <button onClick={()=>signIn( "google",{
               callbackUrl:"http://localhost:3000"
-            })} className="w-full font-body border-[1px] border-[#181818] rounded-xl py-2 mt-4">Login with Google</button>
+            })} className="w-full font-body border-[1px] border-[#181818] rounded-xl py-2 mt-4">Login with Google</button> */}
             <button
             onClick={handleGithubLogin}
             className="w-full border-[1px] font-body border-[#181818] rounded-xl py-2 mt-4">Login with Github</button>

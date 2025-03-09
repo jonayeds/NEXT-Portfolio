@@ -7,10 +7,10 @@ import { TiLocationArrow } from "react-icons/ti"
 
 const ProjectDetail = async({params}:{params:Promise<{projectName:string}>}) => {
 const {projectName} = await params
+console.log("here",`${process.env.SERVER_URL}/projects/${projectName}`)
   const res = await fetch(`${process.env.SERVER_URL}/projects/${projectName}`)
   const {data} = await res.json()
   const project = data as IProject
-  console.log(process.env.SERVER_URL)
   
   return (
     <div className="lg:px-36 px-4  min-h-screen w-screen ">

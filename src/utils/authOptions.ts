@@ -20,6 +20,7 @@ export const authOptions:NextAuthOptions = {
   callbacks:{
     signIn:async({user})=>{
         const isExists = await getUserByEmail(user.email)
+        
         if(!isExists){
             await registerUser({
                 name:user.name as string,

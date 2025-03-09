@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { login } from "@/redux/features/loginState.slice";
 import { registerUser } from "@/utils/actions/registerUser";
 import { toast } from "sonner";
+import { setUser } from "@/redux/features/user.slice";
 
 export type RegisterForm = {
     email: string;
@@ -21,31 +22,32 @@ const RegisterTab = () => {
         const handleLoginState = ()=>{
             dispatch(login())
         }
-        
     const {
         register,
         handleSubmit,
-        
       } = useForm<RegisterForm>();
       const router = useRouter()
       const route = usePathname()
 
       const onSubmit = async (data: RegisterForm) => {
-        console.log(data)
         const toastId = toast.loading("Registering...")
        try {
         const result = await registerUser(data)
         console.log(result)
         if(result?.success){
           toast.success("Registration Successfull",{id:toastId})
-          localStorage.setItem("accessToken", result.accessToken)
+           dispatch(setUser({userInfo:{
+                        role:result?.user?.role,
+                        email:result?.user?.email,
+                      },
+                      token:result.accessToken
+                    }))
           router.push("/")
         }else if(!result?.success){
           toast.error(result?.message, {id:toastId})
         }
        } catch (err:any) {
-        console.error(err.message);
-        throw new Error(err.message);
+        console.log(err.message);
        } 
        
       };
