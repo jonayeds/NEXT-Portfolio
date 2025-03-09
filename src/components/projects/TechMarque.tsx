@@ -11,8 +11,6 @@ const TechMarque = ({technologies}:{technologies:string[]}) => {
         duration:10,
         ease: "none",
     }).repeat(-1)
-
-    // tl.pause()
   });
   return (
      <div className="mt-12">

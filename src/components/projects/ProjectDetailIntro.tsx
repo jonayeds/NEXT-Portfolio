@@ -16,13 +16,6 @@ const ProjectDetailIntro = ({projectName}:{projectName:string}) => {
       duration: 0.5,
       letterSpacing: "12px",
     });
-    // tech.to(".tech",{
-    //     x:"-100%",
-    //     duration:10,
-    //     ease: "none",
-    // }).repeat(-1)
-
-    // tl.pause()
   });
   return (
     <div className="bg-dark text-light h-0 project-loader rounded-b-lg flex items-end justify-center shadow-md">
