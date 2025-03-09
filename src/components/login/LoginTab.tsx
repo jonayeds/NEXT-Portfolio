@@ -5,11 +5,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import RegularButton from "../shared/RegularButton";
 import Link from "next/link";
-import { useAppDispatch } from "@/redux/hook";
-import {  register as setRegister } from "@/redux/features/loginState.slice";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
-import { setUser } from "@/redux/features/user.slice";
+import { Dispatch, SetStateAction } from "react";
 
 export type FormValues = {
     email: string;
@@ -17,10 +15,9 @@ export type FormValues = {
   };
 
 
-const LoginTab = () => {
-    const dispatch = useAppDispatch()
+const LoginTab = ({setLoginState}: {setLoginState:  Dispatch<SetStateAction<"login" | "register">>}) => {
     const handleLoginState = ()=>{
-        dispatch(setRegister())
+        setLoginState("register")
     }
     const handleGithubLogin = ()=>{
       
@@ -41,12 +38,7 @@ const LoginTab = () => {
         if(result){
           toast.success("Successfully Logged in", {id:toastId})
           if(result){
-            dispatch(setUser({userInfo:{
-              role:result?.user?.role,
-              email:result?.user?.email,
-            },
-            token:result.accessToken
-          }))
+            
           }
           router.push("/")
         }else if(!result){

@@ -1,13 +1,11 @@
 "use client"
 import LoginTab from "@/components/login/LoginTab"
 import RegisterTab from "@/components/login/RegisterTab"
-import { useAppSelector } from "@/redux/hook"
 import gsap from "gsap"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const LoginPage = () => {
-
-    const loginState = useAppSelector((state)=>state.login.loginState)
+    const [loginState, setLoginState] = useState<"login" | "register">("login")
     useEffect(()=>{
         const tl = gsap.timeline()
             
@@ -38,12 +36,12 @@ const LoginPage = () => {
         {/* login tab */}
         <div className=" relative">
             <div className="absolute login w-full h-full bg-light z-10 left-0"></div>
-            <LoginTab/>
+            <LoginTab setLoginState={setLoginState}/>
         </div>
         {/* register tab */}
         <div className="relative hidden lg:block">
         <div className="absolute w-full register h-full bg-light z-10  right-0"></div>
-            <RegisterTab/>
+            <RegisterTab setLoginState={setLoginState}/>
         </div>
     </div>
   )

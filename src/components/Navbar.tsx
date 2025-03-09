@@ -1,22 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import {gsap} from "gsap"
+import gsap from "gsap"
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState} from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { signOut } from "next-auth/react";
-import { removeUser } from "@/redux/features/user.slice";
 
 
 const Navbar = () => {
   const tl  = useRef<gsap.core.Timeline | null>(null);
     const currentPath = usePathname()
-    const user = useAppSelector(state =>state.userLogin)
     const [menu, setMenu] = useState(false)
 
-    const dispatch = useAppDispatch()
     useEffect(()=>{
         if(currentPath === "/contact"){
             gsap.to(".line1", {
@@ -109,7 +105,7 @@ const handleMenuOpen =()=>{
 }
 const  handleMenuClose   = (e:any)=>{
   if(e.target.innerText === "LOGOUT"){
-    dispatch(removeUser())
+    
       signOut()
     // window.location.reload()
   }

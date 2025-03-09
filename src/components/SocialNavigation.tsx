@@ -1,5 +1,4 @@
 "use client"
-// import { useAppSelector } from "@/redux/hook"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 

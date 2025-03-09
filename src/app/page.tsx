@@ -2,35 +2,9 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import CustomButton from "@/components/shared/CustomButton";
-import { useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { loginUser } from "@/utils/actions/loginUser";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { setUser } from "@/redux/features/user.slice";
+
 
 export default function Home() {
-  const { data: session } = useSession();
-  const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.userLogin);
-  console.log(data);
-  // useEffect(()=>{
-  //   async function login() {
-  //     if(session?.user && !data?.token){
-  //       const loginReq = await loginUser({email:session.user.email as string, password:"abc"})
-  //       console.log("main Plb", loginReq)
-  //       localStorage.setItem("accessToken", loginReq?.token)
-  //       dispatch(setUser({userInfo:{
-  //         email:session.user.email as string,
-  //         role:loginReq.user?.role as "admin"|"user",
-  //       },
-  //       token:loginReq?.token
-  //     }))
-  //     window.location.reload()
-  //     }
-
-  //   }
-  //   login()
-  // },[session])
   const tl = gsap.timeline();
   useGSAP(() => {
     tl.to(".loader", {
@@ -128,12 +102,12 @@ export default function Home() {
               based in bangladesh
             </span>
           </p>
-          <div className="mx-auto w-max mt-8">
-            {data.token ? (
-              <CustomButton title="Dashboard" to="/dashboard" />
-            ) : (
-              <CustomButton title="My Projects" to="/projects" />
-            )}
+          <div className="mx-auto w-max mt-8 flex gap-4">
+            
+              <CustomButton title="Projects" to="/projects" />
+            
+              
+            
           </div>
         </div>
       </div>
