@@ -1,5 +1,5 @@
-import AllProjects from "@/components/projects/AllProjects";
-import { getProjects } from "@/app/page"; // Import the cached function
+import AllProjects from "@/components/projects/AllProjects"; // Import the cached function
+import { getProjects } from "@/utils/projects/projects";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

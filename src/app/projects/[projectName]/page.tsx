@@ -1,19 +1,57 @@
-/* eslint-disable @next/next/no-img-element */
 import ProjectDetailIntro from "@/components/projects/ProjectDetailIntro"
 import TechMarque from "@/components/projects/TechMarque"
 import { IProject } from "@/types"
 import { TiLocationArrow } from "react-icons/ti"
+import Image from "next/image"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
+// Update the Props type to match Next.js 15 requirements
+type Props = {
+  params: Promise<{ projectName: string }>;
+}
 
-const ProjectDetail = async({params}:{params:Promise<{projectName:string}>}) => {
-const {projectName} = await params
-console.log("here",`${process.env.SERVER_URL}/projects/${projectName}`)
-  const res = await fetch(`${process.env.SERVER_URL}/projects/${projectName}`)
-  const {data} = await res.json()
-  const project = data as IProject
+// Update the metadata function with correct types
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { projectName } = await params;  // Note the await here
+  const res = await fetch(`${process.env.SERVER_URL}/projects/${projectName}`);
+  const { data } = await res.json();
   
+  return {
+    title: `${data.name} | Project Details`,
+    description: data.headline,
+  };
+}
+
+// Add ISR revalidation
+export const revalidate = 3600; // Revalidate every hour
+
+// Generate static paths for all projects
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.SERVER_URL}/projects`);
+  const { data } = await res.json();
+  
+  return data.map((project: IProject) => ({
+    projectName: project.name.toLowerCase(),
+  }));
+}
+
+// Update the page component with correct types
+export default async function ProjectDetail({ params }: Props) {
+  const { projectName } = await params;  // Note the await here
+  
+  const res = await fetch(`${process.env.SERVER_URL}/projects/${projectName}`, {
+    next: { revalidate: 3600 }
+  });
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  const { data: project } = await res.json();
+
   return (
-    <div className="lg:px-36 px-4  min-h-screen w-screen ">
+    <div className="lg:px-36 px-4 min-h-screen w-screen">
       <div className="">
         <div className="min-h-screen">
           <ProjectDetailIntro projectName={project.name}/>
@@ -58,10 +96,14 @@ console.log("here",`${process.env.SERVER_URL}/projects/${projectName}`)
             </div>
           </div>
           <div>
-            <img
+            <Image
               src={project.photo}
-              alt=""
-              className="lg:w-[45vw] md:w-[60vw]  w-[90vw] mt-24 mx-auto rounded-2xl"
+              alt={`${project.name} preview`}
+              width={800}
+              height={600}
+              className="lg:w-[45vw] md:w-[60vw] w-[90vw] mt-24 mx-auto rounded-2xl"
+              priority
+              quality={100}
             />
             <p className="md:max-w-[80vw] max-w-[90vw] mx-auto mt-12 font-body font-light text-lg opacity-90">
               {project.sub_description}
@@ -72,7 +114,7 @@ console.log("here",`${process.env.SERVER_URL}/projects/${projectName}`)
               key characteristics and features
             </h2>
             <div  className="mt-6">
-              {project.key_features.map((feature, idx) => (
+              {(project as IProject).key_features.map((feature: string, idx: number) => (
                 <div
                   className="font-body flex  items-center justify-center gap-4 text-center font-light  text-lg mt-4 group relative "
                   key={idx}
@@ -87,22 +129,37 @@ console.log("here",`${process.env.SERVER_URL}/projects/${projectName}`)
             <div className="mt-12 text-dark font-body font-light text-lg">
                 <p>{project.description}</p>
             </div>
-            <div className={(project.name !== 'YouShare')? "hidden":""}>
-              <img src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726392685/apis_valylk.jpg" className="lg:w-[60vw] w-full  rounded-3xl mx-auto" alt="" />
-            </div>
+            {project.name === 'YouShare' && (
+              <>
+                <Image
+                  src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726392685/apis_valylk.jpg"
+                  alt="YouShare APIs"
+                  width={1200}
+                  height={800}
+                  className="lg:w-[60vw] w-full rounded-3xl mx-auto"
+                />
+                <div className="flex flex-col justify-center items-center gap-12 mt-24">
+                  <Image
+                    src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726391051/share4_rofnhm.png"
+                    alt="YouShare preview 1"
+                    width={1200}
+                    height={800}
+                    className="lg:w-[75vw] w-full rounded-3xl"
+                  />
+                  <Image
+                    src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726391053/share1_rnfdqu.png"
+                    alt="YouShare preview 2"
+                    width={1200}
+                    height={800}
+                    className="lg:w-[75vw] w-full rounded-3xl"
+                  />
+                </div>
+              </>
+            )}
             <TechMarque technologies={project.technologies}/>
-            <div className={(project.name !== 'YouShare')? "hidden":""}>
-              <div className="flex flex-col justify-center items-center gap-12 mt-24 ">
-                <img src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726391051/share4_rofnhm.png" className="lg:w-[75vw] w-full  rounded-3xl" alt="" />
-                <img src="https://res.cloudinary.com/dtqsckwk9/image/upload/v1726391053/share1_rnfdqu.png" alt="" className="lg:w-[75vw] w-full rounded-3xl" />
-              </div>
-                
-            </div>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
-export default ProjectDetail

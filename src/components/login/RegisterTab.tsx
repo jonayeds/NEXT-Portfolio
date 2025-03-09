@@ -15,9 +15,9 @@ export type RegisterForm = {
   };
 
 
-const RegisterTab = ({setLoginState}: {setLoginState:  Dispatch<SetStateAction<"login" | "register">>}) => {
+const RegisterTab = ({setLoginState}: {setLoginState?:  Dispatch<SetStateAction<"login" | "register">>}) => {
         const handleLoginState = ()=>{
-            setLoginState("login")
+           ( setLoginState as Dispatch<SetStateAction<"login" | "register">>)("login") 
         }
     const {
         register,
